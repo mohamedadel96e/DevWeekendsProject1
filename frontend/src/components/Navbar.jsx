@@ -20,9 +20,10 @@ const Navbar = () => {
 
   return (
     <div className='flex items-center justify-between text-sm py-4 mb-5 border-b border-b-[#ADADAD]'>
-      <a href='/' style={{ display: 'flex', alignItems: 'center', fontSize: '1.2em' }}>
-  <FaUserDoctor style={{ marginRight: '8px' }} />Prescripto
-</a>
+      <a href='/' className='flex items-center gap-2 text-[1.2em] font-semibold'>
+        <FaUserDoctor className='text-primary text-2xl' />
+        <span>Prescripto</span>
+      </a>
      
       <ul className='md:flex items-start gap-5 font-medium hidden'>
         <NavLink to='/' >
@@ -47,13 +48,14 @@ const Navbar = () => {
         {
           token && userData
             ? <div className='flex items-center gap-2 cursor-pointer group relative'>
-              <img className='w-8 rounded-full' src={userData.image} alt="" />
+              <img className='w-10 h-10 rounded-full object-cover border border-gray-200 shadow-sm' src={userData.image} alt="" />
               <img className='w-2.5' src={assets.dropdown_icon} alt="" />
-              <div className='absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block'>
-                <div className='min-w-48 bg-gray-50 rounded flex flex-col gap-4 p-4'>
-                  <p onClick={() => navigate('/my-profile')} className='hover:text-black cursor-pointer'>My Profile</p>
-                  <p onClick={() => navigate('/my-appointments')} className='hover:text-black cursor-pointer'>My Appointments</p>
-                  <p onClick={logout} className='hover:text-black cursor-pointer'>Logout</p>
+              <div className='absolute top-0 right-0 pt-12 text-base font-medium text-gray-600 z-50 hidden group-hover:block'>
+                <div className='min-w-48 bg-white border border-gray-100 shadow-lg rounded-lg flex flex-col gap-2 p-3'>
+                  <p onClick={() => navigate('/my-profile')} className='hover:bg-gray-50 hover:text-black cursor-pointer px-3 py-2 rounded-md transition-colors'>My Profile</p>
+                  <p onClick={() => navigate('/my-appointments')} className='hover:bg-gray-50 hover:text-black cursor-pointer px-3 py-2 rounded-md transition-colors'>My Appointments</p>
+                  <hr className='border-t border-gray-100 my-1'/>
+                  <p onClick={logout} className='hover:bg-red-50 hover:text-red-600 cursor-pointer px-3 py-2 rounded-md transition-colors'>Logout</p>
                 </div>
               </div>
             </div>
@@ -64,9 +66,10 @@ const Navbar = () => {
         {/* ---- Mobile Menu ---- */}
         <div className={`md:hidden ${showMenu ? 'fixed w-full' : 'h-0 w-0'} right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all`}>
           <div className='flex items-center justify-between px-5 py-6'>
-          <a href='/' style={{ display: 'flex', alignItems: 'center', fontSize: '1.2em' }}>
-  <FaUserDoctor style={{ marginRight: '8px' }} />Prescripto
-</a>
+          <a href='/' className='flex items-center gap-2 text-[1.2em] font-semibold'>
+            <FaUserDoctor className='text-primary text-2xl' />
+            <span>Prescripto</span>
+          </a>
             <img onClick={() => setShowMenu(false)} src={assets.cross_icon} className='w-7' alt="" />
           </div>
           <ul className='flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium'>

@@ -104,8 +104,7 @@ const updateProfile = async (req, res) => {
 
     try {
         const { userId, name, phone, address, dob, gender } = req.body
-        console.log(imageFile);
-
+        const imageFile = req.file;
         if (!name || !phone || !dob || !gender) {
             return res.json({ success: false, message: "Data Missing" })
         }

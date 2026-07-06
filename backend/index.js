@@ -21,7 +21,7 @@ app.use(
   cors({
     origin: true, // This safely reflects the request origin (allows all)
     methods: ["GET", "POST", "PUT", "DELETE"],
-    // credentials: true,
+    credentials: true,
   })
 );
 

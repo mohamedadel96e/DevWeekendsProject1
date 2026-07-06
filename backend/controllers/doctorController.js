@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
+import { v2 as cloudinary } from 'cloudinary';
 
 // API for doctor Login 
 const loginDoctor = async (req, res) => {
@@ -137,9 +138,17 @@ const doctorProfile = async (req, res) => {
 const updateDoctorProfile = async (req, res) => {
     try {
 
-        const { docId, fees, address, available } = req.body
+        const { docId, fees, address, available, about } = req.body;
+        const imageFile = req.file;
 
-        await doctorModel.findByIdAndUpdate(docId, { fees, address, available })
+        await doctorModel.findByIdAndUpdate(docId, { fees, address: JSON.parse(address), available, about });
+
+        if (imageFile) {
+            // upload image to cloudinary
+            const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: "image" });
+            const imageURL = imageUpload.secure_url;
+            await doctorModel.findByIdAndUpdate(docId, { image: imageURL });
+        }
 
         res.json({ success: true, message: 'Profile Updated' })
 
