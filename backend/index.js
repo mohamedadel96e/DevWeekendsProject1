@@ -19,11 +19,7 @@ connectCloudinary();
 app.use(express.json());
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173", // Frontend React app URL
-      "http://localhost:5174", // Admin React app URL (if running separately)
-      "*", // Allow all origins (for development purposes)
-    ],
+    origin: true, // This safely reflects the request origin (allows all)
     methods: ["GET", "POST", "PUT", "DELETE"],
     // credentials: true,
   })
